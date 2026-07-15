@@ -1,27 +1,16 @@
-# 🚍 School Transport Management System
+# React + Vite
 
-A modern school transport management system.
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-## Features
+Currently, two official plugins are available:
 
-- Admin Dashboard
-- Parent App
-- Driver App
-- Live GPS Tracking
-- Student Check-in / Check-out
-- Route Management
-- Push Notifications
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Tech Stack
+## React Compiler
 
-- Next.js
-- Flutter
-- Node.js
-- Express.js
-- PostgreSQL
-- Socket.IO
-- Firebase Cloud Messaging
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Project Status
+## Expanding the Oxlint configuration
 
-🚧 Under Development
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
