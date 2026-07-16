@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String
+  createdAt DateTime @default(now())
+
+  locations Location[]
+  students  Student[]
+  vehicles  Vehicle[]
+}
+
+model Student {
+  id       Int    @id @default(autoincrement())
+  name     String
+  class    String
+  age      Int?
+  parentId Int
+
+  parent User @relation(fields: [parentId], references: [id])
+
+  createdAt   DateTime     @default(now())
+  attendances Attendance[]
+}
+
+model Vehicle {
+  id        Int    @id @default(autoincrement())
+  vehicleNo String @unique
+  capacity  Int
+
+  driverId Int?
+  driver   User? @relation(fields: [driverId], references: [id])
+
+  trips Trip[]
+
+  createdAt DateTime @default(now())
+}
+
+model Route {
+  id         Int    @id @default(autoincrement())
+  name       String
+  startPoint String
+  endPoint   String
+
+  trips Trip[]
+
+  createdAt DateTime @default(now())
+}
+
+model Trip {
+  id Int @id @default(autoincrement())
+
+  vehicleId Int
+  routeId   Int
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+  route   Route   @relation(fields: [routeId], references: [id])
+
+  date   DateTime
+  status String
+
+  attendance Attendance[]
+
+  createdAt DateTime @default(now())
+}
+
+model Attendance {
+  id           Int       @id @default(autoincrement())
+  studentId    Int
+  tripId       Int
+  status       String    @default("PRESENT")
+  checkInTime  DateTime?
+  checkOutTime DateTime?
+  createdAt    DateTime  @default(now())
+
+  student Student @relation(fields: [studentId], references: [id])
+  trip    Trip    @relation(fields: [tripId], references: [id])
+}
+
+model Location {
+  id        Int      @id @default(autoincrement())
+  driverId  Int
+  latitude  Float
+  longitude Float
+  createdAt DateTime @default(now())
+
+  driver User @relation(fields: [driverId], references: [id])
+}
